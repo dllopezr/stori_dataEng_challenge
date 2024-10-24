@@ -21,3 +21,7 @@ provider "aws" {
 module "storage" {
   source = "./modules/storage"
 }
+
+module "iam" {
+  source = "./modules/iam"
+}
