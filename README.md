@@ -25,3 +25,4 @@ To make the most of this thumbnail generator, I propose the following improvemen
 - Additionally, for massive amounts of petitions it would be a good idea to change the lambda for ECS's clusters under a Load Balancer. Serverless options like Lambda can get very expensive when the usage scales exponentially.
 - You can use SNS to send alerts about failures in the requests.
 - About the management of the infrastructure: it'll be much better to use outputs and variables to reference the resources in Terraform, instead of hardcoding the arn's. This will allow seamless scaling and operability when the architecture begins to grow.
+- To decouple the components, a good approach could be to use two lambdas: One for storing the original images and the second to perform the thumbnail generator. We can use a s3 event to trigger the execution of the second lambda function.
