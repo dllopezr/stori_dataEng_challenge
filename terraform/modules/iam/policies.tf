@@ -33,6 +33,25 @@ resource "aws_iam_policy" "put_stori_raw_images" {
   })
 }
 
+resource "aws_iam_policy" "get_stori_raw_images" {
+  name        = "get_stori_raw_images"
+  description = "This policy grants get objects on the stori-raw-images-dllr bucket"
+
+  policy = jsonencode({
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:GetObject"
+            ],
+            "Resource": [
+                "arn:aws:s3:::stori-raw-images-dllr/*"
+            ]
+        }
+    ]
+  })
+}
 resource "aws_iam_policy" "create_logs" {
   name        = "create_logs"
   description = "Grant permissions to create and write logs in Cloudwatch"
