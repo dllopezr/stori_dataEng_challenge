@@ -29,3 +29,7 @@ module "iam" {
 module "compute" {
   source = "./modules/compute"
 }
+
+module "gateway" {
+  source = "./modules/gateway"
+}
