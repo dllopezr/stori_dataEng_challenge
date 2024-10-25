@@ -49,13 +49,13 @@ resource "aws_lambda_permission" "stori_thumbnail_generator_lambda_permission" {
 
 resource "aws_api_gateway_deployment" "stori_thumbnail_generator_deployment" {
   rest_api_id = aws_api_gateway_rest_api.stori_thumbnail_generator.id
-  stage_name  = "v1"
+  stage_name  = "dev"
 }
 
-resource "aws_api_gateway_stage" "stori_thumbnail_generator_deployment_v1_stage" {
+resource "aws_api_gateway_stage" "stori_thumbnail_generator_deployment_dev_stage" {
   rest_api_id = aws_api_gateway_rest_api.stori_thumbnail_generator.id
   deployment_id = aws_api_gateway_deployment.stori_thumbnail_generator_deployment.id
-  stage_name = "v1" 
+  stage_name = "dev" 
 }
 
 resource "aws_api_gateway_integration_response" "stori_thumbnail_generator_response" {
