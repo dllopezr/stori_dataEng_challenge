@@ -22,6 +22,6 @@ To make the most of this thumbnail generator, I propose the following improvemen
 - You can create an integration to attach the lambda function with SimpleEmailService and send an email to the user with the ID/URL of the image.
 - For analytics purposes, you can create an ETL to bring usage data to a Data Lake (S3 -> Athena)
 - For massive amounts of petitions or large files, you can attach an SQS to the lambda function and change the invoke type to allow asynchronous processing
-- Additionally, for massive amounts of petitions it would be a good idea to change the lambda for ECS's clusters under a Load Balancer. Serverless options like Lambda can get very expensive when the usage scales exponentialy.
+- Additionally, for massive amounts of petitions it would be a good idea to change the lambda for ECS's clusters under a Load Balancer. Serverless options like Lambda can get very expensive when the usage scales exponentially.
 - You can use SNS to send alerts about failures in the requests.
-
+- About the management of the infrastructure: it'll be much better to use outputs and variables to reference the resources in Terraform, instead of hardcoding the arn's. This will allow seamless scaling and operability when the architecture begins to grow.
