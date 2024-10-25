@@ -1,36 +1,32 @@
-import base64
 import json
-import uuid
+import thumbnail_generator
 import boto3
-from PIL import Image
 
-BUCKET_NAME = 'stori-raw-images-dllr'
-s3 = boto3.client('s3')
+RAW_IMAGES_BUCKET = 'stori-raw-images-dllr'
+THUMBNAIL_IMAGES_BUCKET = 'stori-thumbnail-images-dllr'
 
 def lambda_handler(event, context):
 
-    image_uuid = uuid.uuid4()
-    file_content = base64.b64decode(event['body'])
-    s3_key = f'{image_uuid}.jpg'
+    original_image_s3_key = thumbnail_generator.store_original_image(
+        RAW_IMAGES_BUCKET,
+        event
+    )
+
+    thumbnail_key = thumbnail_generator.create_thumbnail_image(
+        RAW_IMAGES_BUCKET,
+        original_image_s3_key,
+        RAW_IMAGES_BUCKET
+    )
+
+    response = thumbnail_generator.generate_presigned_url(
+        RAW_IMAGES_BUCKET,
+        thumbnail_key
+    )
 
 
-    try:
-        s3_response = s3.put_object(
-            Bucket=BUCKET_NAME, 
-            Key=s3_key, 
-            Body=file_content,
-            ContentType='image/jpeg')
-
-        presigned_url = s3.generate_presigned_url('get_object',
-            Params={'Bucket': BUCKET_NAME, 'Key': s3_key},
-            ExpiresIn=3600)
-
-    except Exception as e:
-        raise IOError(e)
     return {
         'statusCode': 200,
         'body': {
-            'file_path': s3_key,
-            'url': presigned_url
+            'url': response
         }
     }
