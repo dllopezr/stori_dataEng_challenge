@@ -25,3 +25,7 @@ module "storage" {
 module "iam" {
   source = "./modules/iam"
 }
+
+module "compute" {
+  source = "./modules/compute"
+}
