@@ -91,7 +91,6 @@ def generate_presigned_url(
     Returns:
         str: A presigned URL to access the specified S3 object. 
     """
-    # Initialize the S3 client
 
     # Generate the presigned URL
     response = s3.generate_presigned_url(
