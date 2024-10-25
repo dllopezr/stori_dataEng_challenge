@@ -11,3 +11,10 @@ resource "aws_s3_bucket" "stori_artifacts" {
         Name = "stori-artifacts-dllr"
     }
 }
+
+resource "aws_s3_bucket" "stori_thumbnail_images" {
+    bucket = "stori-thumbnail-images-dllr"
+    tags = {
+        Name = "stori-thumbnail-images-dllr"
+    }
+}
