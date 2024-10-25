@@ -4,3 +4,10 @@ resource "aws_s3_bucket" "stori_raw_images" {
         Name = "stori-raw-images-dllr"
     }
 }
+
+resource "aws_s3_bucket" "stori_artifacts" {
+    bucket = "stori-artifacts-dllr"
+    tags = {
+        Name = "stori-artifacts-dllr"
+    }
+}
